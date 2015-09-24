@@ -17,6 +17,8 @@ public class ImageDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_display);
 
+        getSupportActionBar().hide();
+
         ImageResult imageResult = getIntent().getParcelableExtra("imageResult");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
         Picasso.with(this).load(imageResult.url).into(ivImageResult);

@@ -49,6 +49,11 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
+
+//        FragmentManager fm = getSupportFragmentManager();
+//        SearchFiltersDialog dialog = SearchFiltersDialog.newInstance();
+//        dialog.show(fm, "fragment_search_filters");
+
     }
 
     private void setupViews() {

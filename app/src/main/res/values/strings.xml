@@ -7,4 +7,11 @@
     <string name="search_prompt">Enter Image Search</string>
     <string name="search">Search</string>
     <string name="title_activity_image_display">ImageDisplayActivity</string>
+
+    <string-array name="sizes_array">
+        <item>small</item>
+        <item>medium</item>
+        <item>large</item>
+        <item>extra-large</item>
+    </string-array>
 </resources>

@@ -22,6 +22,9 @@
             android:name=".activity.ImageDisplayActivity"
             android:label="@string/title_activity_image_display"
             android:parentActivityName=".activity.SearchActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activity.SearchActivity" />
         </activity>
     </application>
 
