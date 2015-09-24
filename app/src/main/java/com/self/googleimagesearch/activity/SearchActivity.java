@@ -2,6 +2,7 @@ package com.self.googleimagesearch.activity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
@@ -17,6 +18,7 @@ import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.self.googleimagesearch.R;
 import com.self.googleimagesearch.adapter.ImageResultsAdapter;
+import com.self.googleimagesearch.fragment.SearchFiltersDialog;
 import com.self.googleimagesearch.model.ImageResult;
 
 import org.json.JSONException;
@@ -49,11 +51,6 @@ public class SearchActivity extends AppCompatActivity {
                 startActivity(i);
             }
         });
-
-//        FragmentManager fm = getSupportFragmentManager();
-//        SearchFiltersDialog dialog = SearchFiltersDialog.newInstance();
-//        dialog.show(fm, "fragment_search_filters");
-
     }
 
     private void setupViews() {
@@ -64,7 +61,7 @@ public class SearchActivity extends AppCompatActivity {
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
-        MenuItem searchItem = menu.findItem(R.id.action_search);
+        MenuItem searchItem = menu.findItem(R.id.mi_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -90,11 +87,6 @@ public class SearchActivity extends AppCompatActivity {
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_settings) {
-            return true;
-        }
-
         return super.onOptionsItemSelected(item);
     }
 
@@ -117,5 +109,12 @@ public class SearchActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    public void onSelectSettings(MenuItem item) {
+
+        FragmentManager fm = getSupportFragmentManager();
+        SearchFiltersDialog dialog = SearchFiltersDialog.newInstance();
+        dialog.show(fm, "fragment_search_filters");
     }
 }

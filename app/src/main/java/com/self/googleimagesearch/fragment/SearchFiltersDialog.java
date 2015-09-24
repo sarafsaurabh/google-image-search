@@ -26,6 +26,7 @@ public class SearchFiltersDialog extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_search_filters, container);
+        getDialog().setTitle(R.string.advanced_filters);
         return view;
     }
 
