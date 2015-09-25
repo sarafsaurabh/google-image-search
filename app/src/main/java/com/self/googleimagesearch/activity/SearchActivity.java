@@ -1,11 +1,13 @@
 package com.self.googleimagesearch.activity;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.view.MenuItemCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.SearchView;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -28,11 +30,18 @@ import java.util.ArrayList;
 
 import cz.msebera.android.httpclient.Header;
 
-public class SearchActivity extends AppCompatActivity {
+public class SearchActivity extends AppCompatActivity
+        implements SearchFiltersDialog.OnFiltersSaveListener {
 
+    private static final String SEARCH_URL =
+            "https://ajax.googleapis.com/ajax/services/search/images?v=1.0";
     private GridView gvResults;
     private ArrayList<ImageResult> imageResults;
     private ImageResultsAdapter aImageResults;
+    private String imageSize = "any";
+    private String colorFilter = "any";
+    private String imageType = "any";
+    private String siteName;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +49,7 @@ public class SearchActivity extends AppCompatActivity {
         setContentView(R.layout.activity_search);
         setupViews();
         imageResults = new ArrayList<>();
+
         aImageResults = new ImageResultsAdapter(this, imageResults);
         gvResults.setAdapter(aImageResults);
         gvResults.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -92,9 +102,11 @@ public class SearchActivity extends AppCompatActivity {
 
     public void searchForImages(String query) {
         AsyncHttpClient client = new AsyncHttpClient();
-        String searchUrl = "https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q="
-                + query + "&rsz=8";
-        client.get(searchUrl, new JsonHttpResponseHandler() {
+        String url = getCompleteSearchUrl(query);
+
+        Log.d(getClass().toString(), "Sending Google Search Request for URL: " + url);
+
+        client.get(url, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(getClass().toString(), "Google Search Response: " + response.toString());
@@ -112,9 +124,37 @@ public class SearchActivity extends AppCompatActivity {
     }
 
     public void onSelectSettings(MenuItem item) {
-
         FragmentManager fm = getSupportFragmentManager();
-        SearchFiltersDialog dialog = SearchFiltersDialog.newInstance();
+        SearchFiltersDialog dialog = SearchFiltersDialog.newInstance(
+                imageSize, colorFilter, imageType, siteName);
         dialog.show(fm, "fragment_search_filters");
+    }
+
+    @Override
+    public void onFiltersSave(
+            String imageSize, String colorFilter, String imageType, String siteName) {
+        this.imageSize = imageSize;
+        this.colorFilter = colorFilter;
+        this.imageType = imageType;
+        this.siteName = siteName;
+    }
+
+    private String getCompleteSearchUrl(String query) {
+        Uri.Builder b = Uri.parse(SEARCH_URL).buildUpon();
+        b.appendQueryParameter("q", query);
+        b.appendQueryParameter("rsz", "8");
+        if(!TextUtils.isEmpty(siteName)) {
+            b.appendQueryParameter("as_sitesearch", siteName);
+        }
+        if(!imageSize.equals("any")) {
+            b.appendQueryParameter("imgsz", imageSize);
+        }
+        if(!colorFilter.equals("any")) {
+            b.appendQueryParameter("imgcolor", colorFilter);
+        }
+        if(!imageType.equals("any")) {
+            b.appendQueryParameter("imgtype", imageType);
+        }
+        return b.toString();
     }
 }

@@ -128,7 +128,6 @@
             android:layout_height="wrap_content"
             android:text="@string/cancel"
             android:id="@+id/btCancel"
-            android:onClick="onCancel"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -137,7 +136,6 @@
             android:layout_height="wrap_content"
             android:text="@string/save"
             android:id="@+id/btSave"
-            android:onClick="onSave"
             android:layout_alignParentRight="true"
             android:layout_alignParentEnd="true" />
     </RelativeLayout>
