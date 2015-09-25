@@ -21,6 +21,7 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 import com.self.googleimagesearch.R;
 import com.self.googleimagesearch.adapter.ImageResultsAdapter;
 import com.self.googleimagesearch.fragment.SearchFiltersDialog;
+import com.self.googleimagesearch.listener.EndlessScrollListener;
 import com.self.googleimagesearch.model.ImageResult;
 
 import org.json.JSONException;
@@ -42,6 +43,8 @@ public class SearchActivity extends AppCompatActivity
     private String colorFilter = "any";
     private String imageType = "any";
     private String siteName;
+    private String currentQuery = null;
+    private int pageOffset = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +64,15 @@ public class SearchActivity extends AppCompatActivity
                 startActivity(i);
             }
         });
+
+
+        gvResults.setOnScrollListener(new EndlessScrollListener() {
+            @Override
+            public void onLoadMore(int page, int totalItemsCount) {
+                searchForImages(null);
+            }
+        });
+
     }
 
     private void setupViews() {
@@ -74,10 +86,9 @@ public class SearchActivity extends AppCompatActivity
         MenuItem searchItem = menu.findItem(R.id.mi_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-            @Override
-            public boolean onQueryTextSubmit(String query) {
-                // perform query here
-                searchForImages(query);
+            public boolean onQueryTextSubmit(String newQuery) {
+                aImageResults.clear();
+                searchForImages(newQuery);
                 return true;
             }
 
@@ -86,8 +97,8 @@ public class SearchActivity extends AppCompatActivity
                 return false;
             }
         });
-        return super.onCreateOptionsMenu(menu);
 
+        return super.onCreateOptionsMenu(menu);
     }
 
     @Override
@@ -100,9 +111,19 @@ public class SearchActivity extends AppCompatActivity
         return super.onOptionsItemSelected(item);
     }
 
-    public void searchForImages(String query) {
+    public void searchForImages(String newQuery) {
+
+        if (newQuery != null) {
+            // this is a new search; so reset the query and offset
+            this.pageOffset = 0;
+            this.currentQuery = newQuery;
+        } else {
+            // use the existing query but increment the offset by 4 (load 4 pics at a time)
+            this.pageOffset += 4;
+        }
+
         AsyncHttpClient client = new AsyncHttpClient();
-        String url = getCompleteSearchUrl(query);
+        String url = getCompleteSearchUrl(this.currentQuery);
 
         Log.d(getClass().toString(), "Sending Google Search Request for URL: " + url);
 
@@ -110,7 +131,6 @@ public class SearchActivity extends AppCompatActivity
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
                 Log.d(getClass().toString(), "Google Search Response: " + response.toString());
-                imageResults.clear();
                 try {
                     aImageResults.addAll(ImageResult.fromJson(
                             response.getJSONObject("responseData").getJSONArray("results")));
@@ -155,6 +175,7 @@ public class SearchActivity extends AppCompatActivity
         if(!imageType.equals("any")) {
             b.appendQueryParameter("imgtype", imageType);
         }
+        b.appendQueryParameter("start", String.valueOf(pageOffset));
         return b.toString();
     }
 }
