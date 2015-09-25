@@ -1,6 +1,9 @@
 package com.self.googleimagesearch.activity;
 
+import android.content.Context;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentManager;
@@ -113,6 +116,12 @@ public class SearchActivity extends AppCompatActivity
 
     public void searchForImages(String newQuery) {
 
+        if(!isNetworkAvailable()) {
+            Toast.makeText(getApplicationContext(),
+                    getString(R.string.network_error), Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         if (newQuery != null) {
             // this is a new search; so reset the query and offset
             this.pageOffset = 0;
@@ -162,7 +171,7 @@ public class SearchActivity extends AppCompatActivity
     private String getCompleteSearchUrl(String query) {
         Uri.Builder b = Uri.parse(SEARCH_URL).buildUpon();
         b.appendQueryParameter("q", query);
-        b.appendQueryParameter("rsz", "8");
+        b.appendQueryParameter("rsz", "4");
         if(!TextUtils.isEmpty(siteName)) {
             b.appendQueryParameter("as_sitesearch", siteName);
         }
@@ -177,5 +186,12 @@ public class SearchActivity extends AppCompatActivity
         }
         b.appendQueryParameter("start", String.valueOf(pageOffset));
         return b.toString();
+    }
+
+    private Boolean isNetworkAvailable() {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnectedOrConnecting();
     }
 }
