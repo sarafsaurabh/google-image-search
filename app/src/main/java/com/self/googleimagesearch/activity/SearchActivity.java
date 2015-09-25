@@ -16,9 +16,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
-import android.widget.GridView;
 import android.widget.Toast;
 
+import com.etsy.android.grid.StaggeredGridView;
 import com.loopj.android.http.AsyncHttpClient;
 import com.loopj.android.http.JsonHttpResponseHandler;
 import com.self.googleimagesearch.R;
@@ -39,7 +39,7 @@ public class SearchActivity extends AppCompatActivity
 
     private static final String SEARCH_URL =
             "https://ajax.googleapis.com/ajax/services/search/images?v=1.0";
-    private GridView gvResults;
+    private StaggeredGridView gvResults;
     private ArrayList<ImageResult> imageResults;
     private ImageResultsAdapter aImageResults;
     private String imageSize = "any";
@@ -79,7 +79,7 @@ public class SearchActivity extends AppCompatActivity
     }
 
     private void setupViews() {
-        gvResults = (GridView) findViewById(R.id.gvResults);
+        gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
     }
 
     @Override

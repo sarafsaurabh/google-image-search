@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
-        android:layout_width="75dp"
-        android:layout_height="75dp"
+        android:layout_width="120dp"
+        android:layout_height="wrap_content"
         android:scaleType="fitXY"
         android:adjustViewBounds="true"
         android:id="@+id/ivImage" />
@@ -13,7 +13,14 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@id/ivImage"
+        android:layout_alignRight="@id/ivImage"
+        android:layout_alignEnd="@id/ivImage"
+        android:layout_alignLeft="@id/ivImage"
+        android:layout_alignStart="@id/ivImage"
+        android:padding="5dp"
+        android:background="#fefefe"
         android:id="@+id/tvTitle"
         android:maxLines="2"
         android:ellipsize="end" />
-</LinearLayout>
+</RelativeLayout>
