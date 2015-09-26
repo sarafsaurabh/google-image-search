@@ -45,8 +45,8 @@
         <item>any</item>
         <item>face</item>
         <item>photo</item>
-        <item>clip art</item>
-        <item>line art</item>
+        <item>clipart</item>
+        <item>lineart</item>
     </string-array>
 
 </resources>

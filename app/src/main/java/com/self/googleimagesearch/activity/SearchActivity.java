@@ -175,7 +175,20 @@ public class SearchActivity extends AppCompatActivity
             b.appendQueryParameter("as_sitesearch", siteName);
         }
         if(!imageSize.equals("any")) {
-            b.appendQueryParameter("imgsz", imageSize);
+
+            //This is from Google API Docs
+            //Restricts the search to images of the specified size, where size can be one of:
+            //
+            //  imgsz=icon restricts results to small images
+            //  imgsz=small|medium|large|xlarge restricts results to medium-sized images
+            //  imgsz=xxlarge restricts results to large images
+            //  imgsz=huge restricts resykts to extra-large images
+            if(imageSize.equals("extra-large")) {
+                b.appendQueryParameter("imgsz", "xxlarge");
+            } else {
+                b.appendQueryParameter("imgsz", imageSize);
+            }
+
         }
         if(!colorFilter.equals("any")) {
             b.appendQueryParameter("imgcolor", colorFilter);
