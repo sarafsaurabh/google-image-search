@@ -21,7 +21,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
         ImageResult imageResult = getIntent().getParcelableExtra("imageResult");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
-        Picasso.with(this).load(imageResult.url).into(ivImageResult);
+        Picasso.with(this).load(imageResult.url).resize(1000, 0).into(ivImageResult);
     }
 
     @Override
