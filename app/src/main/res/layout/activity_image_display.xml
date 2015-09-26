@@ -9,6 +9,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/ivImageResult"
         android:scaleType="center"
+        android:background="#FFFFFF"
         android:adjustViewBounds="true"
         android:layout_alignParentTop="true"
         android:layout_alignParentLeft="true"

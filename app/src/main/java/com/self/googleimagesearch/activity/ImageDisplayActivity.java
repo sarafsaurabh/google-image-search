@@ -37,7 +37,8 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
         ImageResult imageResult = getIntent().getParcelableExtra("imageResult");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
-        Picasso.with(this).load(imageResult.url).resize(1000, 0).into(ivImageResult, new Callback() {
+        Picasso.with(this).load(imageResult.url).placeholder(R.drawable.placeholder)
+                .resize(1000, 0).into(ivImageResult, new Callback() {
             @Override
             public void onSuccess() {
                 setupShareIntent();
@@ -45,9 +46,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
 
             @Override
             public void onError() {
-                Toast.makeText(getApplicationContext(),
-                        getString(R.string.share_fail), Toast.LENGTH_SHORT).show();
-                Log.e(getClass().toString(), "Error encountered while sharing image");
+                Log.e(getClass().toString(), "Error encountered while loading image");
             }
         });
 
