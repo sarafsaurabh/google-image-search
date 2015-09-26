@@ -53,7 +53,8 @@ public class SearchActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
-        setupViews();
+
+        gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
         imageResults = new ArrayList<>();
 
         aImageResults = new ImageResultsAdapter(this, imageResults);
@@ -78,16 +79,14 @@ public class SearchActivity extends AppCompatActivity
 
     }
 
-    private void setupViews() {
-        gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
-    }
-
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem searchItem = menu.findItem(R.id.mi_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
+        searchView.setIconifiedByDefault(false);
+        searchView.setMaxWidth(900);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(String newQuery) {
                 aImageResults.clear();
