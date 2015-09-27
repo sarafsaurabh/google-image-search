@@ -3,6 +3,7 @@ package com.self.googleimagesearch.activity;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
@@ -34,6 +35,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_image_display);
         getSupportActionBar().setDisplayShowTitleEnabled(false);
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5A005C));
 
         ImageResult imageResult = getIntent().getParcelableExtra("imageResult");
         ImageView ivImageResult = (ImageView) findViewById(R.id.ivImageResult);
