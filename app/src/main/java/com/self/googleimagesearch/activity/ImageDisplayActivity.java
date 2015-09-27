@@ -27,7 +27,7 @@ import java.io.IOException;
 
 public class ImageDisplayActivity extends AppCompatActivity {
 
-    private ShareActionProvider miShareAction;
+    private static ShareActionProvider miShareAction;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
