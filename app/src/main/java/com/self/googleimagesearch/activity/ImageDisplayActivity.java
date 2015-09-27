@@ -28,7 +28,7 @@ import java.io.IOException;
 
 public class ImageDisplayActivity extends AppCompatActivity {
 
-    private static ShareActionProvider miShareAction;
+    private static ShareActionProvider miShareActionProvider;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +62,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
         // Locate MenuItem with ShareActionProvider
         MenuItem item = menu.findItem(R.id.mi_share);
         // Fetch reference to the share action provider
-        miShareAction = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
+        miShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(item);
 
         return true;
     }
@@ -115,7 +115,7 @@ public class ImageDisplayActivity extends AppCompatActivity {
         shareIntent.putExtra(Intent.EXTRA_STREAM, bmpUri);
         shareIntent.setType("image/*");
         // Attach share event to the menu item provider
-        miShareAction.setShareIntent(shareIntent);
+        miShareActionProvider.setShareIntent(shareIntent);
     }
 
 }
