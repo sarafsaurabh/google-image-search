@@ -86,7 +86,8 @@ public class SearchActivity extends AppCompatActivity
         MenuItem searchItem = menu.findItem(R.id.mi_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
         searchView.setIconifiedByDefault(false);
-        searchView.setMaxWidth(900);
+        searchView.setIconified(false);
+        searchView.setQueryHint(getString(R.string.search_prompt));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(String newQuery) {
                 aImageResults.clear();

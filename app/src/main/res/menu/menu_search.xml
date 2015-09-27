@@ -11,6 +11,6 @@
         android:title="@string/settings"
         android:icon="@drawable/ic_settings"
         android:onClick="onSelectSettings"
-        app:showAsAction="always" />
+        app:showAsAction="ifRoom|collapseActionView" />
 
 </menu>
