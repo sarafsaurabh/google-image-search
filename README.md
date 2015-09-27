@@ -1,4 +1,4 @@
- Project 1 - *Instagram Viewer - Popular Photos*
+ Project 2 - *Google Image Search*
 
 **Google Image Search** is an android app that allows a user to search for images on web using simple filters. The app utilizes [Google Image Search API](https://developers.google.com/image-search/). 
 
