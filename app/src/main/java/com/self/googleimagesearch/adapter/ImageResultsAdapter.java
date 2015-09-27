@@ -10,6 +10,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.self.googleimagesearch.R;
+import com.self.googleimagesearch.RoundedTransformation;
 import com.self.googleimagesearch.model.ImageResult;
 import com.squareup.picasso.Picasso;
 
@@ -51,7 +52,8 @@ public class ImageResultsAdapter extends ArrayAdapter<ImageResult> {
 
         viewHolder.tvTitle.setText(Html.fromHtml(imageResult.title));
         viewHolder.ivImage.setImageResource(0);
-        Picasso.with(getContext()).load(imageResult.tbUrl).into(viewHolder.ivImage);
+        Picasso.with(getContext()).load(imageResult.tbUrl)
+                .transform(new RoundedTransformation(10, 0)).into(viewHolder.ivImage);
 
         return convertView;
     }

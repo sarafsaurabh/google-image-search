@@ -19,7 +19,7 @@
         android:layout_alignLeft="@id/ivImage"
         android:layout_alignStart="@id/ivImage"
         android:padding="5dp"
-        android:background="#fffff9"
+        android:background="@drawable/rounded_edittext"
         android:id="@+id/tvTitle"
         android:maxLines="2"
         android:ellipsize="end" />

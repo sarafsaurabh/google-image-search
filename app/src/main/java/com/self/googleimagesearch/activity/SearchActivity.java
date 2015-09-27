@@ -2,6 +2,7 @@ package com.self.googleimagesearch.activity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
@@ -54,6 +55,8 @@ public class SearchActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_search);
 
+        getSupportActionBar().setBackgroundDrawable(new ColorDrawable(0xFF5A005C));
+
         gvResults = (StaggeredGridView) findViewById(R.id.gvResults);
         imageResults = new ArrayList<>();
 
@@ -85,8 +88,6 @@ public class SearchActivity extends AppCompatActivity
         getMenuInflater().inflate(R.menu.menu_search, menu);
         MenuItem searchItem = menu.findItem(R.id.mi_search);
         SearchView searchView = (SearchView) MenuItemCompat.getActionView(searchItem);
-        searchView.setIconifiedByDefault(false);
-        searchView.setIconified(false);
         searchView.setQueryHint(getString(R.string.search_prompt));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(String newQuery) {
