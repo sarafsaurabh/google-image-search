@@ -1,32 +1,42 @@
- Project 1 - *Instagram Viewer - Popular Photos*
+ Project 2 - *Google Image Search*
 
-**Popular Photos** is an android app that allows a user to check out popular photos from Instagram. The app utilizes Instagram API to display images and basic image information to the user.
+**Google Image Search** is an android app that allows a user to search for images on web using simple filters. The app utilizes [Google Image Search API](https://developers.google.com/image-search/). 
 
-Time spent: **8** hours spent in total
+Time spent: **14** hours spent in total
 
 ## User Stories
 
 The following **required** functionality is completed:
 
-* [x] User can **scroll through current popular photos** from Instagram
-* [x] For each photo displayed, user can see the following details:
-  * [x] Graphic, Caption, Username
-  * [x] Relative timestamp, like count, user profile image
+* [x] User can **search for images** by specifying a query and launching a search. Search displays a grid of image results from the Google Image API.
+* [x] User can click on "settings" which allows selection of **advanced search options** to filter results
+* [x] User can configure advanced search filters such as:
+  * [x] Size (small, medium, large, extra-large)
+  * [x] Color filter (black, blue, brown, gray, green, etc...) [This filter currently does not work on Google API]
+  * [x] Type (faces, photo, clip art, line art) [This filter currently does not work on Google API]
+  * [x] Site (espn.com)
+* [x] Subsequent searches have any filters applied to the search results
+* [x] User can tap on any image in results to see the image **full-screen**
+* [x] User can **scroll down to see more images**. The maximum number of images is 64 (limited by API).
 
 The following **optional** features are implemented:
 
-* [x] User can **pull-to-refresh** popular stream to get the latest popular photos
-* [ ] Show latest comments for each photo
-* [ ] Display each photo with the same style and proportions as the real Instagram
-* [x] Display each user profile image using a RoundedImageViewDisplay each user profile image using a [RoundedImageView](https://github.com/vinc3m1/RoundedImageView)
-* [x] Display a nice default placeholder graphic for each image during loading
-* [x] Improved the user interface through styling and coloring
+* [x] Implements robust error handling, [check if internet is available](http://guides.codepath.com/android/Sending-and-Managing-Network-Requests#checking-for-network-connectivity), handle error cases, network failures
+* [x] Used the **ActionBar SearchView** or custom layout as the query box instead of an EditText
+* [x] User can **share an image** to their friends or email it to themselves
+* [x] Replaced Filter Settings Activity with a lightweight modal overlay
+* [x] Improved the user interface and experiment with image assets and/or styling and coloring
+
+The following **bonus** features are implemented:
+
+* [x] Used the [StaggeredGridView](https://github.com/f-barth/AndroidStaggeredGrid) to display improve the grid of image results
+* [ ] User can [zoom or pan images](https://github.com/MikeOrtiz/TouchImageView) displayed in full-screen detail view
 
 ## Video Walkthrough 
 
 Here's a walkthrough of implemented user stories:
 
-![Video Walkthrough](https://github.com/sarafsaurabh/instagram-viewer/blob/master/viewer.gif)
+![Video Walkthrough](https://github.com/sarafsaurabh/google-image-search/blob/master/viewer.gif)
 
 
 GIF created with [LiceCap](http://www.cockos.com/licecap/).
