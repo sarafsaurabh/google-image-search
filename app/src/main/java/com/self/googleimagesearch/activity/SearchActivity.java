@@ -90,7 +90,6 @@ public class SearchActivity extends AppCompatActivity
         searchView.setQueryHint(getString(R.string.search_prompt));
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             public boolean onQueryTextSubmit(String newQuery) {
-                aImageResults.clear();
                 searchForImages(newQuery);
                 return true;
             }
@@ -116,6 +115,10 @@ public class SearchActivity extends AppCompatActivity
 
     public void searchForImages(String newQuery) {
 
+        if(newQuery != null && newQuery.equals(this.currentQuery)) {
+            return;
+        }
+
         if(!isNetworkAvailable()) {
             Toast.makeText(getApplicationContext(),
                     getString(R.string.network_error), Toast.LENGTH_SHORT).show();
@@ -123,7 +126,8 @@ public class SearchActivity extends AppCompatActivity
         }
 
         if (newQuery != null) {
-            // this is a new search; so reset the query and offset
+            // this is a new search; so reset the query, page offset and results
+            aImageResults.clear();
             this.pageOffset = 0;
             this.currentQuery = newQuery;
         } else {
