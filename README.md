@@ -1,6 +1,6 @@
- Project 2 - *Google Image Search*
+ Project 2 - *Image Search*
 
-**Google Image Search** is an android app that allows a user to search for images on web using simple filters. The app utilizes [Google Image Search API](https://developers.google.com/image-search/). 
+**Image Search** is an android app that allows a user to search for images on web using simple filters. The app utilizes [Google Image Search API](https://developers.google.com/image-search/). 
 
 Time spent: **14** hours spent in total
 
