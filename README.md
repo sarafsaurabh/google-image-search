@@ -17,7 +17,7 @@ The following **required** functionality is completed:
   * [x] Site (espn.com)
 * [x] Subsequent searches have any filters applied to the search results
 * [x] User can tap on any image in results to see the image **full-screen**
-* [x] User can **scroll down to see more images**. The maximum number of images is 64 (limited by API).
+* [] User can **scroll down to see more images**. The maximum number of images is 64 (limited by API).
 
 The following **optional** features are implemented:
 
