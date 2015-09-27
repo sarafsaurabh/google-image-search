@@ -22,7 +22,7 @@ public class ImageResult implements Parcelable {
 
     public ImageResult(JSONObject json) {
         try {
-            this.url = json.getString("url");
+            this.url = json.getString("unescapedUrl");
             this.tbUrl = json.getString("tbUrl");
             this.title = json.getString("title");
         } catch (JSONException e) {
